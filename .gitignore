@@ -1,3 +1,4 @@
-/src/f0rger2/bin
-/src/f0rger2/obj
-/src/f0rger2/*.suo
+
+/src/*.suo
+/src/Locality/bin
+/src/Locality/obj

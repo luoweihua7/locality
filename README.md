@@ -1,4 +1,4 @@
-Locatify
+Locality
 ========
 
 Nothing here, yet~
