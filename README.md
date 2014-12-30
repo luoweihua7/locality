@@ -1,4 +1,4 @@
-locatify
+Locatify
 ========
 
-fiddler plugin, local file on disk
+Nothing here, yet~
