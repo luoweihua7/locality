@@ -7,7 +7,7 @@ namespace Locality
 {
     public class SchemeService
     {
-        private static SchemeList schemeList = new SchemeList();
+        public static SchemeList schemeList = new SchemeList();
         private static SchemeList enableList = new SchemeList();
 
         /// <summary>

@@ -10,7 +10,7 @@ namespace Locality
     /// 功能设置参数
     /// </summary>
     [Serializable]
-    public class ConfigEntity
+    public class Config
     {
         /// <summary>
         /// 是否启用插件
@@ -34,25 +34,26 @@ namespace Locality
 
         /// <summary>
         /// 挂载配置(如灰度,全网等)
+        /// <para>一般是作为域名组设置</para>
         /// </summary>
         public SchemeList Schemes { get; set; }
 
         /// <summary>
         /// 挂载的文件列表
         /// </summary>
-        public FileHookList HookFiles { get; set; }
+        public HookCollection Files { get; set; }
 
         /// <summary>
         /// 配置类
         /// </summary>
-        public ConfigEntity()
+        public Config()
         {
             this.Enable = true;
             this.EnableTip = true;
             this.StrictMode = false;
             this.EnableScheme = false;
             this.Schemes = new SchemeList();
-            this.HookFiles = new FileHookList();
+            this.Files = new HookCollection();
         }
     }
 }

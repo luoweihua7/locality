@@ -7,7 +7,7 @@ namespace Locality
 {
     public class HookService
     {
-        private static FileHookList fileList = new FileHookList();
+        private static FileHookCollection fileList = new FileHookCollection();
 
         /// <summary>
         /// 添加挂载的文件或者目录
@@ -26,12 +26,7 @@ namespace Locality
             }
             else
             {
-                fileHook = new FileHook()
-                {
-                    Path = filePath,
-                    Enable = enable
-                };
-
+                fileHook = new FileHook(filePath, enable);
                 fileList.Add(fileHook);
             }
         }
