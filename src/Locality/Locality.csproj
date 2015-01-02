@@ -73,7 +73,6 @@
     <Compile Include="Services\ConfigService.cs" />
     <Compile Include="Services\FiddlerService.cs" />
     <Compile Include="Services\FileService.cs" />
-    <Compile Include="Services\HookService.cs" />
     <Compile Include="Services\LogService.cs" />
     <Compile Include="Services\SchemeService.cs" />
     <Compile Include="Services\UtilService.cs" />

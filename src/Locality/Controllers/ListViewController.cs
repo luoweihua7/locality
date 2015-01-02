@@ -21,7 +21,7 @@ namespace Locality
         {
             list.ForEach(item =>
             {
-                Add(item.Path);
+                Add(item.Path, item.Enable);
                 FileService.Add(item.Path, item.Enable);
             });
         }
@@ -31,14 +31,14 @@ namespace Locality
         /// <para>如果文件已经在列表中，则标记为挂载状态</para>
         /// </summary>
         /// <param name="path">文件或者文件夹的完整路径</param>
-        public static void Add(string path)
+        public static void Add(string path, bool enable = true)
         {
             ListViewItem item = GetItem(path);
             if (item == null)
             {
                 //如果不存在则添加到列表
                 item = new ListViewItem();
-                item.Checked = true;
+                item.Checked = enable;
                 item.Text = UtilService.GetName(path);
                 item.SubItems.Add(path);
 

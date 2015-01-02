@@ -228,7 +228,7 @@ namespace Locality
         void OnListViewChecked(object sender, ItemCheckedEventArgs e)
         {
             var enable = e.Item.Checked;
-            var file = e.Item.SubItems[0].Text;
+            var file = e.Item.SubItems[1].Text;
 
             ListViewController.Update(file, enable);
         }
