@@ -1,7 +1,7 @@
 Locality
 ========
 
-Rebuild from f0rger[https://github.com/luoweihua7/f0rger]
+Rebuild from [f0rger](https://github.com/luoweihua7/f0rger)
 
 
 What's this
