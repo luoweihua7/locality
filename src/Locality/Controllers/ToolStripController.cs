@@ -32,7 +32,7 @@ namespace Locality
         /// <param name="enable">是否启用</param>
         public static void Add(string schemeName, List<string> hosts, bool enable = true)
         {
-            ToolStripButton button = Get(schemeName);
+            ToolStripButton button = GetToolStripButton(schemeName);
             if (button == null)
             {
                 StringBuilder sb = new StringBuilder();
@@ -61,7 +61,7 @@ namespace Locality
         /// <param name="schemeName"></param>
         public static void Remove(string schemeName)
         {
-            ToolStripButton button = Get(schemeName);
+            ToolStripButton button = GetToolStripButton(schemeName);
             if (button != null)
             {
                 toolBar.Items.Remove(button);
@@ -78,7 +78,7 @@ namespace Locality
         /// <param name="enable"></param>
         public static void Update(string oldName, string newName, List<string> hosts, bool enable = true)
         {
-            ToolStripButton button = Get(oldName);
+            ToolStripButton button = GetToolStripButton(oldName);
             if (button != null)
             {
                 StringBuilder sb = new StringBuilder();
@@ -101,7 +101,7 @@ namespace Locality
         /// <param name="enable"></param>
         public static void Update(string schemeName, bool enable = true)
         {
-            ToolStripButton button = Get(schemeName);
+            ToolStripButton button = GetToolStripButton(schemeName);
             if (button != null)
             {
                 button.Checked = enable;
@@ -115,7 +115,7 @@ namespace Locality
         /// </summary>
         /// <param name="schemeName"></param>
         /// <returns></returns>
-        public static ToolStripButton Get(string schemeName)
+        public static ToolStripButton GetToolStripButton(string schemeName)
         {
             ToolStripButton button = null;
 
@@ -129,6 +129,11 @@ namespace Locality
             }
 
             return button;
+        }
+
+        public static void Set(bool enable)
+        {
+            toolBar.Enabled = enable;
         }
 
         private static void OnButtonCheckedChange(object sender, EventArgs e)

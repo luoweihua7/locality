@@ -119,8 +119,7 @@ namespace Locality
                 var hosts = scheme.Hosts;
                 var item = hosts.FirstOrDefault(host =>
                 {
-                    result = host == hostName;
-                    return result;
+                    return host == hostName;
                 });
 
                 if (item != null)

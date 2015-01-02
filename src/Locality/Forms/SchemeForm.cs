@@ -89,7 +89,7 @@ namespace Locality
 
             if (selectedIndex == -1)
             {
-                if (ToolStripController.Get(schemeName) != null)
+                if (ToolStripController.GetToolStripButton(schemeName) != null)
                 {
                     MessageBox.Show("Scheme name exists !");
                     return;

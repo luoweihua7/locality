@@ -71,7 +71,7 @@ namespace Locality
 
             cbEnable.CheckedChanged += new EventHandler(ChangeEnableEventArgs);
             cbShowTip.CheckedChanged += new EventHandler(ChangeShowTipEventArgs);
-            cbScheme.CheckedChanged += new EventHandler(ChangeProfileEventArgs);
+            cbScheme.CheckedChanged += new EventHandler(ChangeSchemeEventArgs);
             cbStrictMode.CheckedChanged += new EventHandler(ChangeStrictModeEventArgs);
 
             tsbMgr.Click += new EventHandler(OnManageProfileClick);
@@ -89,7 +89,7 @@ namespace Locality
             #endregion
 
             //保存到全局,方便调用
-            this.controls = new List<Control>() { cbShowTip, cbScheme, cbStrictMode, toolStrip, lv, btnAdd, btnRemove, btnRemove, btnClear };
+            this.controls = new List<Control>() { cbShowTip, cbScheme, cbStrictMode, toolStrip, lv, btnSelectAll, btnAdd, btnRemove, btnClear };
             this.tabPage = tp;
             this.cbEnable = cbEnable;
             this.cbShowTip = cbShowTip;
@@ -130,7 +130,7 @@ namespace Locality
             if (!ConfigService.EnableScheme)
             {
                 //fire event when disabled
-                ChangeProfileEventArgs(this.cbScheme, null);
+                ChangeSchemeEventArgs(this.cbScheme, null);
             }
 
             if (!ConfigService.Enable)
@@ -152,18 +152,27 @@ namespace Locality
                 control.Enabled = enable;
             }
             ConfigService.Enable = enable;
+
+            //启用和禁用的图标
+            if (enable)
+            {
+                this.tabPage.ImageKey = ConfigService.ActiveIcon;
+            }
+            else
+            {
+                this.tabPage.ImageKey = ConfigService.InactiveIcon;
+            }
         }
         void ChangeShowTipEventArgs(object sender, EventArgs e)
         {
             CheckBox cb = (CheckBox)sender;
             ConfigService.EnableTip = cb.Checked;
         }
-        void ChangeProfileEventArgs(object sender, EventArgs e)
+        void ChangeSchemeEventArgs(object sender, EventArgs e)
         {
             var enable = ((CheckBox)sender).Checked;
-            //ToolStripController.Set(enable);
-            //TODO 设置SchemeService和ToolStripController
             ConfigService.EnableScheme = enable;
+            ToolStripController.Set(enable);
         }
         void ChangeStrictModeEventArgs(object sender, EventArgs e)
         {

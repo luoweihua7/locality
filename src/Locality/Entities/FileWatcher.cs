@@ -59,9 +59,6 @@ namespace Locality
         public void GetFiles(object state)
         {
             fileHook.Files = UtilService.GetFiles(directory);
-#if DEBUG
-            LogService.Log(string.Format("{0}有{1}个文件", directory, fileHook.Files.Count));
-#endif
         }
 
         void OnChanged(object sender, FileSystemEventArgs e)
