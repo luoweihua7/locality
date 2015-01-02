@@ -82,6 +82,7 @@ namespace Locality
             lv.DragDrop += new DragEventHandler(OnListViewDragDrop); //拖进来
             lv.ItemChecked += new ItemCheckedEventHandler(OnListViewChecked); //点击勾选
 
+            btnSelectAll.Click += new EventHandler(OnClickSelectAllButton);
             btnAdd.Click += new EventHandler(OnClickAddButton);
             btnRemove.Click += new EventHandler(OnClickRemoveButton);
             btnClear.Click += new EventHandler(OnClickClearButton);
@@ -233,6 +234,13 @@ namespace Locality
             ListViewController.Update(file, enable);
         }
 
+        void OnClickSelectAllButton(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listView.Items)
+            {
+                item.Checked = true; //自动触发OnListViewChecked
+            }
+        }
         void OnClickAddButton(object sender, EventArgs e)
         {
             if (dialog.ShowDialog() == DialogResult.OK)

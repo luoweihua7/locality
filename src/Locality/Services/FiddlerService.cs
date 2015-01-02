@@ -8,7 +8,7 @@ using System.IO;
 
 namespace Locality
 {
-    public class FiddlerService : IFiddlerExtension, IAutoTamper
+    public abstract class FiddlerService : IFiddlerExtension, IAutoTamper
     {
         /// <summary>
         /// 挂载命中处理后的逻辑
@@ -40,20 +40,34 @@ namespace Locality
         {
             if (ConfigService.Enable)
             {
-                string filePath = new System.Uri("http://127.0.0.1" + oSession.url).AbsolutePath; //得到如“/api.do”的字符串
-                string fileName = Path.GetFileName(filePath).ToLower();  // file.ext
-                string path = string.Empty;
+                var temp = new System.Uri(oSession.fullUrl);
+                string filePath = new System.Uri(oSession.fullUrl).AbsolutePath; //得到如“/api.do”的字符串
+                string fileName = Path.GetFileName(oSession.url).ToLower();  // file.ext
+                string localPath = string.Empty;
 
                 if (string.IsNullOrEmpty(fileName)) return; //文件名为空，直接跳过
-                
+
                 if (ConfigService.StrictMode)
                 {
-                    filePath = filePath.Substring(1).Replace("/", "\\"); //去掉第一个左斜杠，并将URL的左斜杠替换成文件目录形式的右斜杠
-                    path = FileService.Exist(filePath, true);
+                    filePath = filePath.Substring(1).Replace("/", "\\").ToLower(); //去掉第一个左斜杠，并将URL的左斜杠替换成文件目录形式的右斜杠
+                    localPath = FileService.Exist(filePath, true);
                 }
                 else
                 {
-                    path = FileService.Exist(fileName);
+                    localPath = FileService.Exist(fileName);
+                }
+
+                if (!string.IsNullOrEmpty(localPath))
+                {
+                    //标记颜色
+                    oSession["ui-color"] = ConfigService.Color;
+                    oSession["ui-backcolor"] = ConfigService.BgColor;
+
+                    oSession.utilCreateResponseAndBypassServer();
+                    oSession.LoadResponseFromFile(localPath);
+
+                    //匹配成功后调用通知事件
+                    OnMatchSession(fileName);
                 }
             }
         }

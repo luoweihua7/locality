@@ -29,7 +29,7 @@ namespace Locality
                     FileInfo[] infos = dir.GetFiles("*.*", SearchOption.AllDirectories);
                     foreach (var info in infos)
                     {
-                        allFiles.Add(info.FullName);
+                        allFiles.Add(info.FullName.ToLower()); //URL不区分大小写
                     }
                 }
                 catch (Exception ex)

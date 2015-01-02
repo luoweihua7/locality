@@ -119,6 +119,11 @@ namespace Locality
         {
             string filePath = string.Empty;
 
+#if DEBUG
+            int findFileCount = 0;
+            int findHookCount = 0;
+#endif
+
             if (strictMode)
             {
                 /**
@@ -140,6 +145,12 @@ namespace Locality
                     var files = fileHook.Files;
                     var dir = fileHook.Path;
                     var isFolder = fileHook.Type == HookType.Folder;
+
+                    if (!fileHook.Enable) return;
+
+#if DEBUG
+                    findHookCount += 1;
+#endif
 
                     files.ForEach(file =>
                     {
@@ -163,6 +174,10 @@ namespace Locality
                                 firstMatch = file;
                             }
                         }
+
+#if DEBUG
+                        findFileCount += 1;
+#endif
                     });
                 });
 
@@ -179,14 +194,26 @@ namespace Locality
                     }
                 }
 
+#if DEBUG
+                LogService.Log(string.Format("从{0}项挂载中查找了{1}个文件", findHookCount, findFileCount));
+#endif
             }
             else
             {
                 foreach (var fileHook in fileHookList)
                 {
+                    if (!fileHook.Enable) continue;
+
+#if DEBUG
+                    findHookCount += 1;
+#endif
+
                     var files = fileHook.Files; //临时对象指向列表，防止在查询期间有数据更新。
                     var path = files.FirstOrDefault(file =>
                     {
+#if DEBUG
+                        findFileCount += 1;
+#endif
                         return file.EndsWith(fileName);
                     });
 
@@ -196,6 +223,10 @@ namespace Locality
                         break;
                     }
                 }
+
+#if DEBUG
+                LogService.Log(string.Format("从{0}项挂载中查找了{1}个文件", findHookCount, findFileCount));
+#endif
             }
 
             return filePath;

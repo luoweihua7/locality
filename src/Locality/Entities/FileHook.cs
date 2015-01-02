@@ -43,7 +43,7 @@ namespace Locality
                 this._Enable = value;
             }
         }
-        public bool _Enable { get; set; }
+        private bool _Enable { get; set; }
 
         /// <summary>
         /// 文件目录
