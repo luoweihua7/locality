@@ -40,9 +40,8 @@ namespace Locality
         {
             if (ConfigService.Enable)
             {
-                var temp = new System.Uri(oSession.fullUrl);
                 string filePath = new System.Uri(oSession.fullUrl).AbsolutePath; //得到如“/api.do”的字符串
-                string fileName = Path.GetFileName(oSession.url).ToLower();  // file.ext
+                string fileName = Path.GetFileName(filePath).ToLower();  // file.ext
                 string localPath = string.Empty;
 
                 if (string.IsNullOrEmpty(fileName)) return; //文件名为空，直接跳过

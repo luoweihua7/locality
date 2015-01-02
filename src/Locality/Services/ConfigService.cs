@@ -158,7 +158,7 @@ namespace Locality
                 EnableTip = _config.EnableTip,
                 StrictMode = _config.StrictMode,
                 EnableScheme = _config.EnableScheme,
-                Schemes = SchemeService.schemeList,
+                Schemes = SchemeService.Get(),
                 Files = FileService.GetHookCollection()
             };
 

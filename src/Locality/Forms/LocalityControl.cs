@@ -22,7 +22,6 @@ namespace Locality
         private List<Control> controls;
         private OpenFileDialog dialog = new OpenFileDialog();
         private PopupForm frmPopup = new PopupForm();
-        private SchemeForm frmScheme = new SchemeForm();
         #endregion
 
         public void InitializeComponent()
@@ -174,7 +173,7 @@ namespace Locality
 
         void OnManageProfileClick(object sender, EventArgs e)
         {
-            frmScheme.ShowDialog();
+            new SchemeForm().ShowDialog();
         }
 
         void OnListViewKeyDown(object sender, KeyEventArgs e)

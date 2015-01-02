@@ -28,17 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.schemeList = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.cbEnable = new System.Windows.Forms.CheckBox();
             this.tbxHosts = new System.Windows.Forms.TextBox();
             this.tbxName = new System.Windows.Forms.TextBox();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.btnRemove = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.hostTip = new System.Windows.Forms.ToolTip(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,6 +52,7 @@
             this.schemeList.Name = "schemeList";
             this.schemeList.Size = new System.Drawing.Size(146, 220);
             this.schemeList.TabIndex = 1;
+            this.schemeList.SelectedIndexChanged += new System.EventHandler(this.schemeList_SelectedIndexChanged);
             // 
             // groupBox1
             // 
@@ -85,6 +88,7 @@
             this.tbxHosts.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbxHosts.Size = new System.Drawing.Size(302, 149);
             this.tbxHosts.TabIndex = 1;
+            this.hostTip.SetToolTip(this.tbxHosts, "Please input host here ( one hostname per line ）");
             // 
             // tbxName
             // 
@@ -92,16 +96,6 @@
             this.tbxName.Name = "tbxName";
             this.tbxName.Size = new System.Drawing.Size(302, 21);
             this.tbxName.TabIndex = 1;
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 238);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(73, 23);
-            this.btnAdd.TabIndex = 1;
-            this.btnAdd.Text = "Add";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label3
             // 
@@ -129,6 +123,16 @@
             this.label2.Size = new System.Drawing.Size(35, 12);
             this.label2.TabIndex = 0;
             this.label2.Text = "Name:";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(12, 238);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(73, 23);
+            this.btnAdd.TabIndex = 1;
+            this.btnAdd.Text = "Add";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnRemove
             // 
@@ -187,5 +191,6 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnRemove;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.ToolTip hostTip;
     }
 }
