@@ -175,7 +175,6 @@ namespace Locality
             catch (Exception err)
             {
                 System.Windows.Forms.MessageBox.Show(err.Message);
-                throw err;
             }
             finally
             {

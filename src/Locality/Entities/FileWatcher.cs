@@ -10,7 +10,6 @@ namespace Locality
     /// <summary>
     /// 目录文件变化监听类
     /// </summary>
-    [Serializable]
     public class FileWatcher
     {
         private FileSystemWatcher fileWatcher;
