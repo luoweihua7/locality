@@ -118,7 +118,7 @@ namespace Locality
         public static string Exist(string fileName, bool strictMode = false)
         {
             string filePath = string.Empty;
-            
+
             if (strictMode)
             {
                 /**
@@ -157,10 +157,11 @@ namespace Locality
                             }
                         }
 
+                        //TODO 如果严格模式不匹配单文件，这里的代码去掉即可
                         //文件名也尝试匹配，在严格路径未有匹配的情况下，可以无需遍历所有列表获取文件名的匹配
                         if (string.IsNullOrEmpty(firstMatch))
                         {
-                            if (file.EndsWith(name))
+                            if (Path.GetFileName(file) == Path.GetFileName(fileName))
                             {
                                 firstMatch = file;
                             }
@@ -190,7 +191,8 @@ namespace Locality
                     var files = fileHook.Files; //临时对象指向列表，防止在查询期间有数据更新。
                     var path = files.FirstOrDefault(file =>
                     {
-                        return file.EndsWith(fileName);
+                        //文件名必须匹配，所以不使用EndsWith
+                        return Path.GetFileName(file) == Path.GetFileName(fileName);
                     });
 
                     if (!string.IsNullOrEmpty(path))

@@ -13,22 +13,22 @@ namespace Locality
     public class FileWatcher
     {
         private FileSystemWatcher fileWatcher;
+        private FileHook fileHook;
         private System.Threading.Timer timer;
         private string directory = string.Empty;
-        private FileHook fileHook;
+        private int delay = 0x200;
 
         public FileWatcher(FileHook hook)
         {
             directory = hook.Path;
             fileHook = hook;
             fileWatcher = new FileSystemWatcher(directory);
-            timer = new System.Threading.Timer(new TimerCallback(GetFiles), null, Timeout.Infinite, Timeout.Infinite);
+            timer = new System.Threading.Timer(new TimerCallback(GetFiles), null, delay, Timeout.Infinite);
 
             fileWatcher.IncludeSubdirectories = true;
             fileWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.DirectoryName;
 
             this.Enable();
-            this.GetFiles(null); //触发一次获取文件列表
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Locality
 
         void OnChanged(object sender, FileSystemEventArgs e)
         {
-            timer.Change(0x200, Timeout.Infinite);
+            timer.Change(delay, Timeout.Infinite);
         }
     }
 }
