@@ -112,10 +112,10 @@ namespace Locality
         /// <returns></returns>
         public static bool IsMatch(string hostName)
         {
-            bool result = false;
-
-            schemeList.FirstOrDefault(scheme =>
+            var match = schemeList.FirstOrDefault(scheme =>
             {
+                if (!scheme.Enable) return false; //禁用的场景跳过
+
                 var hosts = scheme.Hosts;
                 var item = hosts.FirstOrDefault(host =>
                 {
@@ -129,7 +129,7 @@ namespace Locality
                 return false;
             });
 
-            return result;
+            return match != null; //match!=null时表示有匹配的数据
         }
     }
 }

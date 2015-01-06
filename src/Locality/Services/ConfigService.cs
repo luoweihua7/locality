@@ -25,7 +25,7 @@ namespace Locality
         /// 右下角窗口的显示时间
         /// <para>超过显示时间会隐藏窗口</para>
         /// </summary>
-        public static long DueTime = 3000;
+        public static long DueTime = 2560;
 
         /// <summary>
         /// 命中规则后,Fiddler请求列表中的request项字体颜色
