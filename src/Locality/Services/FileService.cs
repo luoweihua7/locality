@@ -133,39 +133,28 @@ namespace Locality
                 string name = UtilService.GetName(fileName); //获取文件名，在严格路径匹配不到时，或者可以通过匹配文件名得到
                 double matchQuality = 0; //引入匹配度概念，全部匹配，获取最大匹配度的文件
                 string bestMatch = string.Empty;
-                string firstMatch = string.Empty; //第一个文件名匹配文件路径
-                string searchName=Path.GetFileName(fileName);
+                string searchName = Path.GetFileName(fileName);
 
                 fileHookList.ForEach(fileHook =>
                 {
                     var files = fileHook.Files;
                     var dir = fileHook.Path;
-                    var isFolder = fileHook.Type == HookType.Folder;
 
                     if (!fileHook.Enable) return;
+                    if (fileHook.Type != HookType.Folder) return; //严格模式跳过非目录的挂载
 
                     files.ForEach(file =>
                     {
-                        if (isFolder) file = file.Replace(dir, string.Empty);
+                        file = file.Replace(dir, string.Empty); //后去相对路径
 
-                        if (Path.GetFileName(file) == searchName) //先决条件：文件名必须匹配
+                        if (Path.GetFileName(file) == searchName && file.EndsWith(fileName)) //先决条件：文件名必须匹配
                         {
-                            if (file.EndsWith(fileName))
+                            double quality = ((double)fileName.Length) / file.Length;
+                            if (quality > matchQuality)
                             {
-                                double quality = ((double)fileName.Length) / file.Length;
-                                if (quality > matchQuality)
-                                {
-                                    //匹配度较高时，保存路径和匹配度
-                                    matchQuality = quality;
-                                    bestMatch = file;
-                                }
-                            }
-
-                            //TODO 如果严格模式不匹配单文件，这里的代码去掉即可
-                            //文件名也尝试匹配，在严格路径未有匹配的情况下，可以无需遍历所有列表获取文件名的匹配
-                            if (string.IsNullOrEmpty(firstMatch))
-                            {
-                                    firstMatch = file;
+                                //匹配度较高时，保存路径和匹配度
+                                matchQuality = quality;
+                                bestMatch = file;
                             }
                         }
                     });
@@ -177,11 +166,20 @@ namespace Locality
                 }
                 else
                 {
-                    //最佳匹配无结果时，获取第一个文件名匹配的文件
-                    if (!string.IsNullOrEmpty(firstMatch))
+                    //最佳匹配无结果时，匹配单文件的挂载
+                    fileHookList.FirstOrDefault(fileHook =>
                     {
-                        filePath = firstMatch;
-                    }
+                        if (!fileHook.Enable) return false;
+                        if (fileHook.Type != HookType.File) return false;
+
+                        //单文件挂载下Path和Feils中的内容一样的
+                        if (Path.GetFileName(fileHook.Path) == searchName)
+                        {
+                            filePath = fileHook.Path;
+                            return true;
+                        }
+                        return false;
+                    });
                 }
             }
             else
