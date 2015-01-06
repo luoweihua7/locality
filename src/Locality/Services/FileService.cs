@@ -168,28 +168,6 @@ namespace Locality
                                     firstMatch = file;
                             }
                         }
-
-
-                        //if (file.EndsWith(fileName) && Path.GetFileName(file) == searchName)
-                        //{
-                        //    double quality = ((double)fileName.Length) / file.Length;
-                        //    if (quality > matchQuality)
-                        //    {
-                        //        //匹配度较高时，保存路径和匹配度
-                        //        matchQuality = quality;
-                        //        bestMatch = file;
-                        //    }
-                        //}
-
-                        ////TODO 如果严格模式不匹配单文件，这里的代码去掉即可
-                        ////文件名也尝试匹配，在严格路径未有匹配的情况下，可以无需遍历所有列表获取文件名的匹配
-                        //if (string.IsNullOrEmpty(firstMatch))
-                        //{
-                        //    if (Path.GetFileName(file) == searchName)
-                        //    {
-                        //        firstMatch = file;
-                        //    }
-                        //}
                     });
                 });
 
