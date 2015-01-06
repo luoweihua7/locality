@@ -1,10 +1,3 @@
-Locality
-====
-Rebuild from [f0rger](https://github.com/luoweihua7/f0rger)
-
-
-What's this
-====
 This is fiddler extension project. replace response context from local file, just like Autoresponser but create rule quicker.
 
 How to
