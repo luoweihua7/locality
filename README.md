@@ -24,8 +24,7 @@ How to
 * click manage button below "Enable Scheme" checkbox
 * add/delete/update scheme(s)
 
-######Done
-enjoy
+######Done, enjoy~
 
 TODO
 ====
