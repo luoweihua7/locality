@@ -9,16 +9,16 @@ This is a fiddler plugin. replace response context from local file, just like Au
 
 How to
 ==========
-##Copy Locality.dll to folder
+######Copy Locality.dll to folder
 * C:\Users\\[User]\Documents\Fiddler2\Scripts 
 
-##Create rules
+######Create rules
 ============
 * copy file(s)/directory and patse (Ctrl+V) on Locality tabpage
 * drag file(s)/directory and patse into Locality tabpage
 * click Add button on Locality tabpage
 
-##Create scheme
+######Create scheme
 ==============
 * enable scheme first ( make "Enable Scheme" checked )
 * click manage button below "Enable Scheme" checkbox
