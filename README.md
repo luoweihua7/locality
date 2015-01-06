@@ -1,6 +1,6 @@
 This is fiddler extension project. replace response context from local file, just like Autoresponser but create rule quicker.
 
-How to
+How to use
 ====
 ######Copy Locality.dll to folder
 * C:\Users\\[User]\Documents\Fiddler2\Scripts 
