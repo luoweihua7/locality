@@ -101,6 +101,8 @@ namespace Locality
 
         public FileHook(string path, bool enable = true)
         {
+            path = path.ToLower(); //转换成全小写，URL不区分大小写
+
             this.Path = path;
             this.Files = new List<string>();
 
