@@ -14,9 +14,10 @@ namespace Locality
         /// <summary>
         /// 通过目录获取目录下的所有文件
         /// </summary>
-        /// <param name="folder"></param>
+        /// <param name="folder">目录地址，要求全小写（Windows不区分大小写）</param>
+        /// <param name="relative">是否相对路径，即不包含目录地址</param>
         /// <returns></returns>
-        public static List<string> GetFiles(string folder)
+        public static List<string> GetFiles(string folder, bool relative = false)
         {
             List<string> allFiles = new List<string>();
 
@@ -29,7 +30,9 @@ namespace Locality
                     FileInfo[] infos = dir.GetFiles("*.*", SearchOption.AllDirectories);
                     foreach (var info in infos)
                     {
-                        allFiles.Add(info.FullName.ToLower()); //URL不区分大小写
+                        var file = info.FullName.ToLower();
+                        if (relative) file = file.Replace(folder, string.Empty); //获取相对路径
+                        allFiles.Add(file); //URL不区分大小写
                     }
                 }
                 catch (Exception ex)

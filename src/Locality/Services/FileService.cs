@@ -155,11 +155,12 @@ namespace Locality
 
                     files.ForEach(file =>
                     {
-                        file = file.Replace(dir, string.Empty); //后去相对路径
+                        //TODO 性能优化，计算所有相对路径并保存
+                        var relativePath = file.Replace(dir, string.Empty); //获取相对路径
 
-                        if (Path.GetFileName(file) == searchName && file.EndsWith(fileName)) //先决条件：文件名必须匹配
+                        if (Path.GetFileName(relativePath) == searchName && fileName.EndsWith(relativePath)) //先决条件：文件名必须匹配
                         {
-                            double quality = ((double)fileName.Length) / file.Length;
+                            double quality = ((double)relativePath.Length) / fileName.Length;
                             if (quality > matchQuality)
                             {
                                 //匹配度较高时，保存路径和匹配度

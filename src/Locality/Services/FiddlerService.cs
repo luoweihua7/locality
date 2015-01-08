@@ -59,7 +59,7 @@ namespace Locality
 
                 if (ConfigService.StrictMode)
                 {
-                    filePath = filePath.Substring(1).Replace("/", "\\").ToLower(); //去掉第一个左斜杠，并将URL的左斜杠替换成文件目录形式的右斜杠
+                    filePath = filePath.Replace("/", "\\").ToLower(); //将URL的左斜杠替换成文件目录形式的右斜杠
                     localPath = FileService.Exist(filePath, true);
                 }
                 else
