@@ -123,7 +123,8 @@ namespace Locality
             {
                 /**
                  * 匹配文件过程如下：
-                 * 严格模式匹配引入了匹配度的概念，遍历数据时，获取最大匹配度的一个文件，即匹配路径与挂载文件下的路径最符合的文件
+                 * 严格模式匹配引入了匹配度的概念
+                 * 遍历数据时，获取最大匹配度的一个文件，即匹配路径与挂载文件下的路径最符合的文件
                  * 在严格匹配无结果的情况下，通过文件名匹配符合条件的文件
                  * 为了解决在第一次便利数据时无匹配的条件下，需要遍历第二次的问题，所以在遍历第一次的时候，就尝试匹配文件名
                  */
@@ -133,6 +134,7 @@ namespace Locality
                 string name = UtilService.GetName(fileName); //获取文件名，在严格路径匹配不到时，或者可以通过匹配文件名得到
                 double matchQuality = 0; //引入匹配度概念，全部匹配，获取最大匹配度的文件
                 string bestMatch = string.Empty;
+                string fileMatch = string.Empty; //文件名匹配,即匹配挂载的单文件
                 string searchName = Path.GetFileName(fileName);
 
                 fileHookList.ForEach(fileHook =>
@@ -141,7 +143,15 @@ namespace Locality
                     var dir = fileHook.Path;
 
                     if (!fileHook.Enable) return;
-                    if (fileHook.Type != HookType.Folder) return; //严格模式跳过非目录的挂载
+                    if (fileHook.Type != HookType.Folder)
+                    {
+                        if (string.IsNullOrEmpty(fileMatch) && Path.GetFileName(fileHook.Path) == searchName)
+                        {
+                            //顺便匹配出单文件，减少遍历成本
+                            fileMatch = fileHook.Path;
+                        }
+                        return;
+                    }
 
                     files.ForEach(file =>
                     {
@@ -167,19 +177,7 @@ namespace Locality
                 else
                 {
                     //最佳匹配无结果时，匹配单文件的挂载
-                    fileHookList.FirstOrDefault(fileHook =>
-                    {
-                        if (!fileHook.Enable) return false;
-                        if (fileHook.Type != HookType.File) return false;
-
-                        //单文件挂载下Path和Feils中的内容一样的
-                        if (Path.GetFileName(fileHook.Path) == searchName)
-                        {
-                            filePath = fileHook.Path;
-                            return true;
-                        }
-                        return false;
-                    });
+                    filePath = fileMatch;
                 }
             }
             else
