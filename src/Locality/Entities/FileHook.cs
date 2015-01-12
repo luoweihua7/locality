@@ -112,7 +112,7 @@ namespace Locality
             }
             else
             {
-                Files.Add(path); //文件模式，列表中只有一个文件
+                Files.Add(System.IO.Path.GetFileName(path)); //文件模式，列表中只有一个文件
             }
             this.Enable = enable;
         }

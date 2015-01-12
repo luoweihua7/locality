@@ -57,7 +57,7 @@ namespace Locality
 
         public void GetFiles(object state)
         {
-            fileHook.Files = UtilService.GetFiles(directory);
+            fileHook.Files = UtilService.GetFiles(directory, true);
         }
 
         void OnChanged(object sender, FileSystemEventArgs e)
