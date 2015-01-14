@@ -193,7 +193,16 @@ namespace Locality
 
                     if (!string.IsNullOrEmpty(path))
                     {
-                        filePath = path;
+                        if (fileHook.Type == HookType.File)
+                        {
+                            //文件挂载，Path就是完整路径
+                            filePath = fileHook.Path;
+                        }
+                        else
+                        {
+                            //目录挂载，拼接完整模式
+                            filePath = fileHook.Path + path;
+                        }
                         break;
                     }
                 }
