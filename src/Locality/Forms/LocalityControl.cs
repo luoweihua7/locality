@@ -38,7 +38,7 @@ namespace Locality
             CheckBox cbEnable = new CheckBox() { Text = "Enable", AutoSize = true, Location = new Point(3, 8), UseVisualStyleBackColor = true };
             CheckBox cbScheme = new CheckBox() { Text = "Enable Scheme", AutoSize = true, Location = new Point(125, 8), UseVisualStyleBackColor = true };
             CheckBox cbStrictMode = new CheckBox() { Text = "Strict Mode", AutoSize = true, Location = new Point(230, 8), UseVisualStyleBackColor = true };
-            CheckBox cbShowTip = new CheckBox() { Text = "Show Tips", AutoSize = true, Location = new Point(320, 8), UseVisualStyleBackColor = true };
+            CheckBox cbShowTip = new CheckBox() { Text = "Enable Tip", AutoSize = true, Location = new Point(320, 8), UseVisualStyleBackColor = true };
 
             ToolStrip toolStrip = new ToolStrip() { Location = new Point(0, 0), RenderMode = ToolStripRenderMode.System, Height = 25 };
             ToolStripButton tsbMgr = new ToolStripButton() { DisplayStyle = ToolStripItemDisplayStyle.Image, ImageTransparentColor = Color.Magenta, Image = Resources.scheme };
