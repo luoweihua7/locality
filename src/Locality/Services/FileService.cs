@@ -148,7 +148,10 @@ namespace Locality
                         if (string.IsNullOrEmpty(fileMatch) && Path.GetFileName(fileHook.Path) == searchName)
                         {
                             //顺便匹配出单文件，减少遍历成本
-                            fileMatch = fileHook.Path;
+                            if (File.Exists(fileHook.Path))
+                            {
+                                fileMatch = fileHook.Path;
+                            }
                         }
                         return;
                     }
@@ -195,8 +198,11 @@ namespace Locality
                     {
                         if (fileHook.Type == HookType.File)
                         {
+                            if (!File.Exists(fileHook.Path)) continue;
+
                             //文件挂载，Path就是完整路径
                             filePath = fileHook.Path;
+
                         }
                         else
                         {
