@@ -165,8 +165,12 @@ namespace Locality
                             if (quality > matchQuality)
                             {
                                 //匹配度较高时，保存路径和匹配度
-                                matchQuality = quality;
-                                bestMatch = dir + file; //恢复完整路径
+                                string fullPath = dir + file;
+                                if (File.Exists(fullPath)) //FileSystemWatcher无法监听到“被监听目录”被删除的事件，只能监听到“被监听目录”下的子目录和文件的变更事件
+                                {
+                                    matchQuality = quality;
+                                    bestMatch = fullPath; //恢复完整路径
+                                }
                             }
                         }
                     });
