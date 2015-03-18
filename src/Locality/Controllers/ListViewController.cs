@@ -21,8 +21,8 @@ namespace Locality
         {
             list.ForEach(item =>
             {
-                Add(item.Path, item.Enable);
-                FileService.Add(item.Path, item.Enable);
+                Add(item.Path.ToLower(), item.Enable);
+                FileService.Add(item.Path.ToLower(), item.Enable);
             });
         }
 
@@ -60,7 +60,7 @@ namespace Locality
         {
             foreach (ListViewItem item in listView.SelectedItems)
             {
-                var filePath = item.SubItems[1].Text;
+                var filePath = item.SubItems[1].Text.ToLower(); //全部小写
 
                 listView.Items.Remove(item);
                 FileService.Remove(filePath);

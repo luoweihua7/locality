@@ -195,7 +195,7 @@ namespace Locality
                     {
                         foreach (string file in Clipboard.GetFileDropList())
                         {
-                            ListViewController.Add(file);
+                            ListViewController.Add(file.ToLower());
                         }
 
                         e.Handled = true;
@@ -231,13 +231,13 @@ namespace Locality
             string[] dropList = (string[])e.Data.GetData(DataFormats.FileDrop);
             foreach (string file in dropList)
             {
-                ListViewController.Add(file);
+                ListViewController.Add(file.ToLower());
             }
         }
         void OnListViewChecked(object sender, ItemCheckedEventArgs e)
         {
             var enable = e.Item.Checked;
-            var file = e.Item.SubItems[1].Text;
+            var file = e.Item.SubItems[1].Text.ToLower();
 
             ListViewController.Update(file, enable);
         }
@@ -255,7 +255,7 @@ namespace Locality
             {
                 foreach (string file in dialog.FileNames)
                 {
-                    ListViewController.Add(file);
+                    ListViewController.Add(file.ToLower());
                 }
             }
         }

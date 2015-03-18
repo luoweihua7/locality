@@ -32,11 +32,11 @@ namespace Locality
                     //文件夹状态下，有一个文件变动监听类
                     if (value)
                     {
-                        this.Watcher.Enable();
+                        this.Watcher.Start();
                     }
                     else
                     {
-                        this.Watcher.Disable();
+                        this.Watcher.Stop();
                     }
                 }
 
@@ -115,6 +115,15 @@ namespace Locality
                 Files.Add(System.IO.Path.GetFileName(path)); //文件模式，列表中只有一个文件
             }
             this.Enable = enable;
+        }
+
+        public void Destory()
+        {
+            if (this.Watcher != null)
+            {
+                this.Watcher.Destory();
+                this.Watcher = null;
+            }
         }
     }
 

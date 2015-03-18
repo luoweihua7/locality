@@ -66,7 +66,7 @@ namespace Locality
         {
             bool enable = cbEnable.Checked;
             string schemeName = tbxName.Text;
-            string hostsStr = tbxHosts.Text.Trim().Replace(" ", string.Empty).Replace("\r\n", ",").Replace(";", ",");
+            string hostsStr = tbxHosts.Text.Trim().Replace(" ", string.Empty).Replace("\r\n", ",").Replace(";", ",").ToLower();
 
             if (string.IsNullOrEmpty(schemeName))
             {

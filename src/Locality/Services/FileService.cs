@@ -79,6 +79,7 @@ namespace Locality
 
             if (fileHook != null)
             {
+                fileHook.Destory();
                 Remove(fileHook);
             }
         }

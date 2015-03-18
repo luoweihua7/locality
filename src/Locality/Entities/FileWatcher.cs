@@ -28,13 +28,13 @@ namespace Locality
             fileWatcher.IncludeSubdirectories = true;
             fileWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.Size | NotifyFilters.DirectoryName;
 
-            this.Enable();
+            this.Start();
         }
 
         /// <summary>
         /// 启用监听
         /// </summary>
-        public void Enable()
+        public void Start()
         {
             fileWatcher.Changed += OnChanged;
             fileWatcher.Created += OnChanged;
@@ -46,13 +46,21 @@ namespace Locality
         /// <summary>
         /// 禁用监听
         /// </summary>
-        public void Disable()
+        public void Stop()
         {
             fileWatcher.EnableRaisingEvents = false;
             fileWatcher.Changed -= OnChanged;
             fileWatcher.Created -= OnChanged;
             fileWatcher.Deleted -= OnChanged;
             fileWatcher.Renamed -= OnChanged;
+        }
+
+        public void Destory()
+        {
+            this.Stop();
+
+            fileWatcher.Dispose();
+            fileWatcher = null;
         }
 
         public void GetFiles(object state)
