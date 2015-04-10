@@ -22,4 +22,4 @@ How to use
 TODO
 ====
 * Bug fix
-* Simulate Speed (Global)
+* ~~Simulate Speed (Global)
